@@ -2,26 +2,29 @@ package br.com.vini.tasks.functional;
 
 import static org.junit.Assert.assertEquals;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TasksTest {
 
-	public WebDriver acessarApp() {
-		WebDriver driver = new ChromeDriver();
-		driver.navigate().to("http://localhost:8888/tasks/");
+	public WebDriver acessarApp() throws MalformedURLException {
+//		WebDriver driver = new ChromeDriver();Web
+		DesiredCapabilities capabilities =  DesiredCapabilities.chrome();
+		WebDriver driver = new RemoteWebDriver(new URL("http://172.20.0.1:4444/wd/hub"),capabilities);
+		driver.navigate().to("http://172.20.0.1:8888/tasks/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
 	}
 
 	@Test
-	public void deveSalvarTarefaComSucesso() {
+	public void deveSalvarTarefaComSucesso() throws MalformedURLException {
 
 		WebDriver driver = acessarApp();
 		try {
@@ -41,7 +44,7 @@ public class TasksTest {
 	}
 
 	@Test
-	public void naoDeveSalvarTarefaComfalhaPorData() {
+	public void naoDeveSalvarTarefaComfalhaPorData() throws MalformedURLException {
 		WebDriver driver = acessarApp();
 		try {
 			driver.findElement(By.id("addTodo")).click();
@@ -60,7 +63,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaSemDescricao() {
+	public void naoDeveSalvarTarefaSemDescricao() throws MalformedURLException {
 		WebDriver driver = acessarApp();
 		try {
 			driver.findElement(By.id("addTodo")).click();
@@ -77,7 +80,7 @@ public class TasksTest {
 		}
 	}
 	@Test
-	public void naoDeveSalvarTarefaSemData() {
+	public void naoDeveSalvarTarefaSemData() throws MalformedURLException {
 		WebDriver driver = acessarApp();
 		try {
 			driver.findElement(By.id("addTodo")).click();
