@@ -9,14 +9,14 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TasksTest {
 
 	public WebDriver acessarApp() throws MalformedURLException {
 //		WebDriver driver = new ChromeDriver();Web
-		DesiredCapabilities capabilities =  DesiredCapabilities.chrome();
+		ChromeOptions capabilities = new ChromeOptions();
 		WebDriver driver = new RemoteWebDriver(new URL("http://172.20.0.1:4444/wd/hub"),capabilities);
 		driver.navigate().to("http://172.20.0.1:8888/tasks/");
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
