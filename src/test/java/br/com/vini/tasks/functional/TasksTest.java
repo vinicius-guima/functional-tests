@@ -19,7 +19,7 @@ public class TasksTest {
 		DesiredCapabilities capabilities =  DesiredCapabilities.chrome();
 		WebDriver driver = new RemoteWebDriver(new URL("http://172.20.0.1:4444/wd/hub"),capabilities);
 		driver.navigate().to("http://172.20.0.1:8888/tasks/");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		return driver;
 	}
 
